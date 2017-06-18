@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'tweet',
     'team',
     'game',
+	'base',
 ]
 
 MIDDLEWARE = [
@@ -57,8 +58,8 @@ ROOT_URLCONF = 'Sentimeter.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        'DIRS': ['base\\templates\\','game\\templates\\','team\\templates\\'],
+        'APP_DIRS': False,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
