@@ -15,7 +15,8 @@ window.onload = function() {
 	var chart = new Highcharts.Chart('container', {
 
 		title: {
-			text: '{{ team.longName }} Tweet Sentiment'
+			//text: '{{ team.longName }} Tweet Sentiment'
+			text:null
 		},
 		
 		xAxis: {
@@ -45,78 +46,79 @@ window.onload = function() {
 			data: scoreArrayInt,
 			color: '#{{ team.homeColour }}'
 		}]
-
-	});
-	var map = new Highcharts.mapChart('mapContainer', {
-		chart: {
-			map: 'custom/world'
-		},
-
-		title: {
-			text: 'Tweet Locations'
-		},
-
-		mapNavigation: {
-			enabled: true
-		},
-
-		tooltip: {
-			headerFormat: '',
-			pointFormat: '<b>{point.name}</b><br>Lat: {point.lat}, Lon: {point.lon}'
-		},
-
-		series: [{
-			// Specify points using lat/lon
-			type: 'mappoint',
-			name: 'Cities',
-			color: Highcharts.getOptions().colors[1],
-			data: [{
-				name: 'London',
-				lat: 51.507222,
-				lon: -0.1275
-			}, {
-				name: 'Birmingham',
-				lat: 52.483056,
-				lon: -1.893611
-			}, {
-				name: 'Leeds',
-				lat: 53.799722,
-				lon: -1.549167
-			}, {
-				name: 'Glasgow',
-				lat: 55.858,
-				lon: -4.259
-			}, {
-				name: 'Sheffield',
-				lat: 53.383611,
-				lon: -1.466944
-			}, {
-				name: 'Liverpool',
-				lat: 53.4,
-				lon: -3
-			}, {
-				name: 'Bristol',
-				lat: 51.45,
-				lon: -2.583333
-			}, {
-				name: 'Belfast',
-				lat: 54.597,
-				lon: -5.93
-			}, {
-				name: 'Lerwick',
-				lat: 60.155,
-				lon: -1.145,
-				dataLabels: {
-					align: 'left',
-					x: 5,
-					verticalAlign: 'middle'
-				}
-			}]
-		}]
 	});
 }
 </script>
-<div id="container" style="width: 600px; height: 400px; margin: 0 auto"></div>
-<div id="mapContainer" style="width: 600px; height: 400px; margin: 0 auto">
-</div>
+<h1 id="header">
+{{ team.longName }}
+<img src="{% static team.imagePath %}" alt="" width="50" height="50">
+</h1>
+<h3>
+Next game: {{ team.nextGame.longName }}
+<img src="{% static team.nextGame.imagePath %}" alt="" width="20" height="20">
+</h3>
+<h2>
+Tweet Sentiment
+</h2>
+<div id="container" style="width: 600px; height: 400px; margin: auto"></div>
+<h2>
+Tweet Locations
+<h2>
+<div id="mapContainer" style="width: 600px; height: 400px; margin: auto"></div>
+<script type="text/javascript">
+      function initMap() {
+	  	var tweets = '{{ tweets }}';
+        var map = new google.maps.Map(document.getElementById('mapContainer'), {
+          zoom: 1,
+          center: {lat: 0, lng: 0}
+        });
+		function pinSymbol(color) {
+			return {
+				path: 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0 z M -2,-30 a 2,2 0 1,1 4,0 2,2 0 1,1 -4,0',
+				fillColor: color,
+				fillOpacity: 1,
+				strokeColor: '#000',
+				strokeWeight: 2,
+				scale: 1,
+		   };
+		}
+		'{% for i in tweets %}'
+			var myloc = {lat: parseFloat('{{ i.latitude }}'), lng: parseFloat('{{ i.longitude }}')};
+			var marker = new google.maps.Marker({
+			  position: myloc,
+			  map: map,
+			  icon: pinSymbol('#{{ team.homeColour }}')
+			});
+		'{% endfor %}'
+      }
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6yQCFQnx_S7r_y_G-2XE6hd89JLcwqbY&callback=initMap">
+</script>
+<h2>
+Player Scores
+</h2>
+{% for player in players %}
+	{% if player.score > 70 %}
+		<div class="highscore player">
+	{% elif player.score > 30 %}
+		<div class="midscore player">
+	{% else %}
+		<div class="lowscore player">
+	{% endif %}
+		<div class="name">
+			{{ player }}
+		</div>
+		<div class="num">
+			{{ player.score }}
+			{% if player.score > player.lastScore %}
+				<img src="{% static "images/up.png" %}" alt="" width="10" height="10">
+			{% elif player.score < player.lastScore %}
+				<img src="{% static "images/down.png" %}" alt="" width="10" height="10">
+			{% else %}
+				<img src="{% static "images/neutral.png" %}" alt="" width="10" height="10">
+			{% endif %}
+		</div>
+	</div>
+{% endfor %}
 {% endblock %}

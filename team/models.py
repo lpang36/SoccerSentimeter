@@ -32,11 +32,17 @@ class Team(models.Model):
         on_delete=models.CASCADE,
         null=True,
     )
+    imagePath = models.CharField(
+        max_length = 50,
+        null=True)
     def __str__(self):
         return self.longName
     
 class Player(models.Model):
-    name = models.CharField(
+    firstName = models.CharField(
+        max_length=50,
+        null=True)
+    lastName = models.CharField(
         max_length=50)
     score = models.IntegerField()
     lastScore = models.IntegerField()
@@ -44,3 +50,5 @@ class Player(models.Model):
         'Team',
         on_delete=models.CASCADE,
     )
+    def __str__(self):
+        return self.lastName

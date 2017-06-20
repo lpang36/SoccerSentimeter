@@ -15,9 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import include,url
 from django.contrib import admin
+from team.views import team
+from base.views import home
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^team/', include('team.urls')),
-    url(r'^game/', include('game.urls')),
+    url(r'^team/([A-Z]+)', team, name='team'),
+    url(r'^game/', include('game.urls'), name='game'),
+	url(r'^about/', include('base.urls'), name='about'),
+	url(r'^$', home, name='home'),
 ]
