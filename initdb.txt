@@ -1,0 +1,9 @@
+name: VAN
+longName: Vancouver Whitecaps
+homeColour: white
+awayColour: blue
+league: Premier League
+nextGame: TFC
+imagePath: images/VAN.png
+Player: lastName: Ousted
+Player: firstName: David
