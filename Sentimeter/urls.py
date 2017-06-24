@@ -16,12 +16,13 @@ Including another URLconf
 from django.conf.urls import include,url
 from django.contrib import admin
 from team.views import team
+from game.views import game
 from base.views import home
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^team/([A-Z]+)', team, name='team'),
-    url(r'^game/', include('game.urls'), name='game'),
+    url(r'^team/([A-Z]+)/', team, name='team'),
+    url(r'^game/([A-Z]+)_([A-Z]+)/', game, name='game'),
 	url(r'^about/', include('base.urls'), name='about'),
 	url(r'^$', home, name='home'),
 ]

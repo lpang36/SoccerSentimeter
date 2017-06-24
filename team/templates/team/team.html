@@ -13,6 +13,9 @@ window.onload = function() {
 		scoreArrayInt[scoreArrayInt.length] = x;
 	}
 	var chart = new Highcharts.Chart('container', {
+		chart: {
+			className: 'largediv'
+		},
 
 		title: {
 			//text: '{{ team.longName }} Tweet Sentiment'
@@ -60,11 +63,11 @@ Next game: {{ team.nextGame.longName }}
 <h2>
 Tweet Sentiment
 </h2>
-<div id="container" style="width: 600px; height: 400px; margin: auto"></div>
+<div id="container" class="largediv"></div>
 <h2>
 Tweet Locations
-<h2>
-<div id="mapContainer" style="width: 600px; height: 400px; margin: auto"></div>
+</h2>
+<div id="mapContainer" class="largediv"></div>
 <script type="text/javascript">
       function initMap() {
 	  	var tweets = '{{ tweets }}';

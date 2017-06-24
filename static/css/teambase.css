@@ -1,0 +1,51 @@
+ul {
+	padding: 0;
+}
+
+div {
+	position: relative;
+	overflow: hidden;
+}
+
+.num {
+	width: 280px;
+	text-align: right;
+	float:right;
+	padding: 2px 2px 2px 2px;
+}
+
+.name {
+	width: 300px;
+	text-align: left;
+	float:left;
+	padding: 2px 2px 2px 2px;
+}
+
+.largediv {
+	width: 600px; 
+	height: 400px; 
+	margin: auto;
+}
+
+h2 {
+	color: #333333;
+	font-size: 18px;
+	text-align: center; 
+	margin: auto;
+	padding: 20px 20px 20px 20px;
+}
+
+h1 {
+	color: #333333;
+	font-size: 50px;
+	text-align: center; 
+	margin: auto;
+	padding: 20px 20px 20px 20px;
+}
+
+h3 {
+	color: #333333;
+	font-size: 25px;
+	text-align: center; 
+	margin: auto;
+}

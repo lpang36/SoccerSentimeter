@@ -2,4 +2,181 @@
 {% load staticfiles %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/game.css' %}">
+<script type="text/javascript">
+window.onload = function() {
+	var scoreList1 = '{{ team1.scoreList }}';
+	var scoreArray1 = scoreList1.split(",");
+	var scoreArrayInt1 = new Array();
+	for (i of scoreArray1) {
+		var x = parseInt(i);
+		scoreArrayInt1[scoreArrayInt1.length] = x;
+	}
+	var scoreList2 = '{{ team2.scoreList }}';
+	var scoreArray2 = scoreList2.split(",");
+	var scoreArrayInt2 = new Array();
+	for (i of scoreArray2) {
+		var x = parseInt(i);
+		scoreArrayInt2[scoreArrayInt2.length] = x;
+	}
+	var colour1 = '#{{ team1.homeColour }}';
+	var colour2 = '#{{ team2.homeColour }}';
+	if (colour1==colour2) {
+		colour2 = '#{{ team2.awayColour }}';
+	}
+	var chart = new Highcharts.Chart('container', {
+		chart: {
+			className: 'largediv'
+		},
+
+		title: {
+			text:null
+		},
+		
+		xAxis: {
+			type: 'datetime'
+		},
+		
+		yAxis: {
+			title: {
+				text: 'Average Sentiment Score'
+			}
+		},
+		legend: {
+			layout: 'vertical',
+			align: 'right',
+			verticalAlign: 'middle'
+		},
+
+		plotOptions: {
+			series: {
+				pointStart: Date.UTC(2017,0,1),
+				pointInterval: 24*3600*1000
+			}
+		},
+
+		series: [
+		{
+			name: '{{ team1.longName }}',
+			data: scoreArrayInt1,
+			color: colour1
+		}, 
+		{
+			name: '{{ team2.longName }}',
+			data: scoreArrayInt2,
+			color: colour2
+		}
+		]
+	});
+}
+</script>
+<h1 id="header">
+<img src="{% static team1.imagePath %}" alt="" width="50" height="50">
+{{ team1.longName }} vs {{ team2.longName }}
+<img src="{% static team2.imagePath %}" alt="" width="50" height="50">
+</h1>
+<h2>
+Tweet Sentiment
+</h2>
+<div id="container" class="largediv"></div>
+<h2>
+Tweet Locations
+<h2>
+<script type="text/javascript">
+      function initMap() {
+	  	var tweets1 = '{{ tweets1 }}';
+		var tweets2 = '{{ tweets2 }}';
+        var map = new google.maps.Map(document.getElementById('mapContainer'), {
+          zoom: 1,
+          center: {lat: 0, lng: 0}
+        });
+		function pinSymbol(color) {
+			return {
+				path: 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0 z M -2,-30 a 2,2 0 1,1 4,0 2,2 0 1,1 -4,0',
+				fillColor: color,
+				fillOpacity: 1,
+				strokeColor: '#000',
+				strokeWeight: 2,
+				scale: 1,
+		   };
+		}
+		var colour1 = '#{{ team1.homeColour }}';
+		var colour2 = '#{{ team2.homeColour }}';
+		if (colour1==colour2) {
+			colour2 = '#{{ team2.awayColour }}';
+		}
+		'{% for i in tweets1 %}'
+			var myloc = {lat: parseFloat('{{ i.latitude }}'), lng: parseFloat('{{ i.longitude }}')};
+			var marker = new google.maps.Marker({
+			  position: myloc,
+			  map: map,
+			  icon: pinSymbol(colour1)
+			});
+		'{% endfor %}'
+		'{% for i in tweets2 %}'
+			var myloc = {lat: parseFloat('{{ i.latitude }}'), lng: parseFloat('{{ i.longitude }}')};
+			var marker = new google.maps.Marker({
+			  position: myloc,
+			  map: map,
+			  icon: pinSymbol(colour2)
+			});
+		'{% endfor %}'
+      }
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6yQCFQnx_S7r_y_G-2XE6hd89JLcwqbY&callback=initMap">
+</script>
+<div id="mapContainer" class="largediv"></div>
+<h2>
+{{ team1.longName }} Player Scores
+</h2>
+{% for player in players1 %}
+	{% if player.score > 70 %}
+		<div class="highscore player team1">
+	{% elif player.score > 30 %}
+		<div class="midscore player team1">
+	{% else %}
+		<div class="lowscore player team1">
+	{% endif %}
+		<div class="name">
+			{{ player }}
+		</div>
+		<div class="num">
+			{{ player.score }}
+			{% if player.score > player.lastScore %}
+				<img src="{% static "images/up.png" %}" alt="" width="10" height="10">
+			{% elif player.score < player.lastScore %}
+				<img src="{% static "images/down.png" %}" alt="" width="10" height="10">
+			{% else %}
+				<img src="{% static "images/neutral.png" %}" alt="" width="10" height="10">
+			{% endif %}
+		</div>
+	</div>
+{% endfor %}
+<h2>
+{{ team2.longName }} Player Scores
+</h2>
+{% for player in players2 %}
+	{% if player.score > 70 %}
+		<div class="highscore player team2">
+	{% elif player.score > 30 %}
+		<div class="midscore player team2">
+	{% else %}
+		<div class="lowscore player team2">
+	{% endif %}
+		<div class="name">
+			{{ player }}
+		</div>
+		<div class="num">
+			{{ player.score }}
+			{% if player.score > player.lastScore %}
+				<img src="{% static "images/up.png" %}" alt="" width="10" height="10">
+			{% elif player.score < player.lastScore %}
+				<img src="{% static "images/down.png" %}" alt="" width="10" height="10">
+			{% else %}
+				<img src="{% static "images/neutral.png" %}" alt="" width="10" height="10">
+			{% endif %}
+		</div>
+	</div>
+{% endfor %}
 {% endblock %}
