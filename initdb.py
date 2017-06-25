@@ -27,6 +27,10 @@ def findColour( str ):
 		return "ffffff"
 	elif str=="gray" or str=="grey":
 		return "808080"
+	elif str=="claret":
+		return "801638"
+	elif str=="skyblue":
+		return "7ec0ee"
 	else:
 		return str
 for line in file:
