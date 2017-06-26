@@ -12,8 +12,11 @@ class Team(models.Model):
     scoreList = models.CharField(
         max_length=500,
         validators=[validate_comma_separated_integer_list],
-		null=True,
-    )
+        default='')
+    volumeList = models.CharField(
+        max_length=500,
+        validators=[validate_comma_separated_integer_list],
+        default='')
     associatedTags = models.TextField(
 		default='')
     name = models.CharField(
@@ -49,13 +52,15 @@ class Team(models.Model):
 class Player(models.Model):
     firstName = models.CharField(
         max_length=50,
-        null=True)
+        default = '')
     lastName = models.CharField(
         max_length=50)
     score = models.IntegerField(
 		default=0)
     lastScore = models.IntegerField(
 		default=0)
+    volume = models.IntegerField(
+        default=25)
     team = models.ForeignKey(
         'Team',
         on_delete=models.CASCADE,

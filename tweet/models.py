@@ -4,7 +4,7 @@ from team.models import Team
 
 class Tweet(models.Model):
     date = models.DateTimeField(
-        default=timezone.now)
+        default=timezone.now,)
     link = models.CharField(
         max_length=25)
     latitude = models.FloatField(
@@ -16,6 +16,6 @@ class Tweet(models.Model):
         on_delete=models.CASCADE,
     )
     score = models.IntegerField(
-		null=True)
+        default=0)
     def __str__(self):
-        return self.text
+        return self.link
