@@ -5,14 +5,17 @@ from team.models import Team
 class Tweet(models.Model):
     date = models.DateTimeField(
         default=timezone.now)
-    text = models.CharField(
-        max_length=140)
-    latitude = models.FloatField()
-    longitude = models.FloatField()
+    link = models.CharField(
+        max_length=25)
+    latitude = models.FloatField(
+		null=True)
+    longitude = models.FloatField(
+		null=True)
     team = models.ForeignKey(
         'team.Team',
         on_delete=models.CASCADE,
     )
-    score = models.IntegerField()
+    score = models.IntegerField(
+		null=True)
     def __str__(self):
         return self.text
