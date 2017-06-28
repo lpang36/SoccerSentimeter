@@ -81,7 +81,7 @@ def createTweet ( tweet ):
 def getAggregateScore ( scorelist ):
 	return round(sum(scorelist)/len(scorelist))
 	
-teams = Team.objects.all()[9:20] #change this to 0
+teams = Team.objects.all()[0:20] #change this to 0
 for thisTeam in teams:
 	currentTeam = thisTeam
 	if currentTeam.name is None or currentTeam.longName is None:
