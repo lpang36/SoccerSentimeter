@@ -2,10 +2,44 @@
 {% load staticfiles %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/basictext.css' %}">
+<div class = "content">
 <h1>
-Sports Sentimeter
+Premier League Sentimeter
 </h1>
+<h2>
+About
+</h2>
 <p>
 This site uses twitter data to gauge the overall sentiment about a soccer team and its players. 
 </p>
+<h2>
+Team Score
+</h2>
+<p>
+For each team, its overall sentiment score for the past month is displayed in a line graph. This score is determined by averaging the sentiment score of a sample of tweets over a given time period.
+</p>
+<h2>
+Tweet Locations
+</h2>
+<p>
+Locations of tweets about a particular team are displayed via twitter geolocation data. Note that this data only exists for a small fraction of tweets. 
+</p>
+<h2>
+Player Scores
+</h2>
+<p>
+Player scores are determined the same way as those of teams. 
+<img src="{% static "images/up.png" %}" alt="" width="10" height="10"> 
+means a positive change, 
+<img src="{% static "images/down.png" %}" alt="" width="10" height="10">
+means a negative change, and 
+<img src="{% static "images/neutral.png" %}" alt="" width="10" height="10">
+means the score was unchanged or no tweets were found. Note that small sample size may skew some player scores.
+</p>
+<h2>
+Navigation
+</h2>
+The sidebar menu links to each team. The <a href="{% url 'compare' %}">compare tool</a> allows for the data of two teams to be displayed simultaneously and compared.
+</div>
 {% endblock %}

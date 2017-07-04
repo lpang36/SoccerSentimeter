@@ -12,11 +12,11 @@ from team.models import *
 from tweet.models import *
 import random
 
-def getTweets ( str, obj, client, client2 ):
+def getTweets ( str, obj, client, client2, num ):
 	urldict = {
 		'q': str,
 		'since': obj.date.isoformat(),
-		'count': 100,
+		'count': num,
 	}
 	url = "https://api.twitter.com/1.1/search/tweets.json?"+urllib.parse.urlencode(urldict) #find a way to limit search results
 	if random.random()>0.5:
@@ -97,7 +97,10 @@ def update ( flag ):
 		if thisTeam.name is None or thisTeam.longName is None:
 			thisTeam.delete()
 			continue
-		data = getTweets(thisTeam.longName, thisTeam, client, client2)
+		numTweets = 100
+		if not flag:
+			numTweets = 1000
+		data = getTweets(thisTeam.longName, thisTeam, client, client2, numTweets)
 		teamlist = []
 		for tweet in data['statuses']:
 			teamlist.append(createTweet(tweet, thisTeam))
@@ -112,7 +115,7 @@ def update ( flag ):
 			players = Player.objects.filter(team=thisTeam)
 			for thisPlayer in players:
 				playerlist = []
-				data = getTweets(thisPlayer.firstName+" "+thisPlayer.lastName, thisPlayer, client, client2)
+				data = getTweets(thisPlayer.firstName+" "+thisPlayer.lastName, thisPlayer, client, client2, 100)
 				for tweet in data['statuses']:
 					playerlist.append(createTweet(tweet, thisTeam))
 				if len(playerlist)==0:

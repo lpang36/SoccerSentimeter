@@ -100,7 +100,7 @@ Tweet Locations
 		   };
 		}
 		'{% for i in tweets %}'
-			var myloc = {lat: parseFloat('{{ i.latitude }}'), lng: parseFloat('{{ i.longitude }}')};
+			var myloc = {lat: parseFloat('{{ i.longitude }}'), lng: parseFloat('{{ i.latitude }}')};
 			var marker = new google.maps.Marker({
 			  position: myloc,
 			  map: map,

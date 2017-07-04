@@ -130,7 +130,7 @@ Tweet Locations
 			colour2 = '#{{ team2.awayColour }}';
 		}
 		'{% for i in tweets1 %}'
-			var myloc = {lat: parseFloat('{{ i.latitude }}'), lng: parseFloat('{{ i.longitude }}')};
+			var myloc = {lat: parseFloat('{{ i.longitude }}'), lng: parseFloat('{{ i.latitude }}')};
 			var marker = new google.maps.Marker({
 			  position: myloc,
 			  map: map,
@@ -138,7 +138,7 @@ Tweet Locations
 			});
 		'{% endfor %}'
 		'{% for i in tweets2 %}'
-			var myloc = {lat: parseFloat('{{ i.latitude }}'), lng: parseFloat('{{ i.longitude }}')};
+			var myloc = {lat: parseFloat('{{ i.longitude }}'), lng: parseFloat('{{ i.latitude }}')};
 			var marker = new google.maps.Marker({
 			  position: myloc,
 			  map: map,
