@@ -50,6 +50,8 @@ class Team(models.Model):
         return self.longName
     
 class Player(models.Model):
+    date = models.DateField(
+        default=timezone.now)
     firstName = models.CharField(
         max_length=50,
         default = '')

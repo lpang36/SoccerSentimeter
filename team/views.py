@@ -7,6 +7,6 @@ from .models import Player
 
 def team(request,teamName):
     thisTeam = Team.objects.filter(name=teamName).first()
-    tweets = Tweet.objects.filter(team=thisTeam)
+    tweets = Tweet.objects.filter(team=thisTeam).exclude(latitude=None)
     players = Player.objects.filter(team=thisTeam).order_by('-score')
     return render(request,'team/team.html',{'team': thisTeam,'tweets': tweets,'players': players})

@@ -151,56 +151,56 @@ Tweet Locations
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6yQCFQnx_S7r_y_G-2XE6hd89JLcwqbY&callback=initMap">
 </script>
 <div id="mapContainer" class="largediv"></div>
-<h2>
-{{ team1.longName }} Player Scores
-</h2>
-{% for player in players1 %}
-	{% if player.score > 10 %}
-		<div class="highscore player team1">
-	{% elif player.score > 0 %}
-		<div class="midscore player team1">
-	{% else %}
-		<div class="lowscore player team1">
-	{% endif %}
-		<div class="name">
-			{{ player }}
+	<h2>
+	{{ team1.longName }} Player Scores
+	</h2>
+	{% for player in players1 %}
+		{% if player.score > 10 %}
+			<div class="highscore player team1">
+		{% elif player.score > 0 %}
+			<div class="midscore player team1">
+		{% else %}
+			<div class="lowscore player team1">
+		{% endif %}
+			<div class="name">
+				{{ player }}
+			</div>
+			<div class="num">
+				{{ player.score }}
+				{% if player.score > player.lastScore %}
+					<img src="{% static "images/up.png" %}" alt="" width="10" height="10">
+				{% elif player.score < player.lastScore %}
+					<img src="{% static "images/down.png" %}" alt="" width="10" height="10">
+				{% else %}
+					<img src="{% static "images/neutral.png" %}" alt="" width="10" height="10">
+				{% endif %}
+			</div>
 		</div>
-		<div class="num">
-			{{ player.score }}
-			{% if player.score > player.lastScore %}
-				<img src="{% static "images/up.png" %}" alt="" width="10" height="10">
-			{% elif player.score < player.lastScore %}
-				<img src="{% static "images/down.png" %}" alt="" width="10" height="10">
-			{% else %}
-				<img src="{% static "images/neutral.png" %}" alt="" width="10" height="10">
-			{% endif %}
+	{% endfor %}
+	<h2>
+	{{ team2.longName }} Player Scores
+	</h2>
+	{% for player in players2 %}
+		{% if player.score > 10 %}
+			<div class="highscore player team2">
+		{% elif player.score > 0 %}
+			<div class="midscore player team2">
+		{% else %}
+			<div class="lowscore player team2">
+		{% endif %}
+			<div class="name">
+				{{ player }}
+			</div>
+			<div class="num">
+				{{ player.score }}
+				{% if player.score > player.lastScore %}
+					<img src="{% static "images/up.png" %}" alt="" width="10" height="10">
+				{% elif player.score < player.lastScore %}
+					<img src="{% static "images/down.png" %}" alt="" width="10" height="10">
+				{% else %}
+					<img src="{% static "images/neutral.png" %}" alt="" width="10" height="10">
+				{% endif %}
+			</div>
 		</div>
-	</div>
-{% endfor %}
-<h2>
-{{ team2.longName }} Player Scores
-</h2>
-{% for player in players2 %}
-	{% if player.score > 10 %}
-		<div class="highscore player team2">
-	{% elif player.score > 0 %}
-		<div class="midscore player team2">
-	{% else %}
-		<div class="lowscore player team2">
-	{% endif %}
-		<div class="name">
-			{{ player }}
-		</div>
-		<div class="num">
-			{{ player.score }}
-			{% if player.score > player.lastScore %}
-				<img src="{% static "images/up.png" %}" alt="" width="10" height="10">
-			{% elif player.score < player.lastScore %}
-				<img src="{% static "images/down.png" %}" alt="" width="10" height="10">
-			{% else %}
-				<img src="{% static "images/neutral.png" %}" alt="" width="10" height="10">
-			{% endif %}
-		</div>
-	</div>
 {% endfor %}
 {% endblock %}

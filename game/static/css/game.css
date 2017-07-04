@@ -7,14 +7,14 @@
 }
 
 .num {
-	width: 300px;
+	width: 50%;
 	text-align: right;
 	float:right;
 	padding: 2px 2px 2px 2px;
 }
 
 .name {
-	width: 280px;
+	width: 50%;
 	text-align: left;
 	float:left;
 	padding: 2px 2px 2px 2px;
