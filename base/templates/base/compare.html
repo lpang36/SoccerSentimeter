@@ -5,12 +5,12 @@
 <link rel="stylesheet" href="{% static 'css/compare.css' %}">
 <script src="{% static 'js/dropdown.js' %}"></script>
 <div class = "cont">
-	<div class="comp" id="team1">
+	<div class="comp BOU" id="team1">
 	<div class="dropdown">
-  <button class="dropbtn">Dropdown<a class="hidden"> </a></button>
+  <button class="dropbtn" id="team1dropdown">AFC Bournemouth</button>
   <div class="dropdown-content">
 	{% for team in teams %}
-    <a href="#" onclick="select(this,1)" class = "{{ team.name }}"> 
+    <a href="#" onclick="select(this,'team1')" class = "{{ team.name }}"> 
 	{{ team.longName }}
 	<img src="{% static team.imagePath %}" alt="" width="10" height="10">
 	</a>
@@ -18,12 +18,17 @@
   </div>
 </div>
 	</div>
-	<div class="comp" id="team2">
+	<div class="mid">
+	<h2>
+	vs
+	</h2>
+	</div>
+	<div class="comp BOU" id="team2">
 	<div class="dropdown">
-  <button class="dropbtn">Dropdown<a class="hidden"> </a></button>
+  <button class="dropbtn" id="team2dropdown">AFC Bournemouth</button>
   <div class="dropdown-content">
 	{% for team in teams %}
-    <a href="#" onclick="select(this,2)" class = "{{ team.name }}"> 
+    <a href="#" onclick="select(this,'team2')" class = "{{ team.name }}"> 
 		{{ team.longName }}
 	<img src="{% static team.imagePath %}" alt="" width="10" height="10">
 	</a>
@@ -32,5 +37,5 @@
 </div>
 	</div>
 </div>
-<button onmouseenter="compare(this)"> Compare Teams </button>
+<a onmouseenter="compare(this)" class = "comparebtn dropbtn btn" href = "{% url 'game' 'BOU' 'BOU' %}"> Compare Teams </a>
 {% endblock %}
