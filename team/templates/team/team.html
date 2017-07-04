@@ -12,6 +12,17 @@ window.onload = function() {
 		var x = parseInt(i);
 		scoreArrayInt[scoreArrayInt.length] = x;
 	}
+	var colourTag = '{{ team.homeColour }}' === 'ffffff';
+	var seriesColour = '#{{ team.homeColour }}';
+	var markerOptions = {};
+	if (colourTag) {
+		seriesColour = '#000000';
+		markerOptions = {
+			lineWidth: 1,
+			lineColor: '#000000',
+			fillColor: '#ffffff'
+		}
+	}
 	var chart = new Highcharts.Chart('container', {
 		chart: {
 			className: 'largediv'
@@ -40,14 +51,15 @@ window.onload = function() {
 		plotOptions: {
 			series: {
 				pointStart: Date.UTC(2017,0,1),
-				pointInterval: 24*3600*1000
+				pointInterval: 24*3600*1000,
+			    marker: markerOptions
 			}
 		},
-
+		
 		series: [{
 			name: '{{ team.longName }}',
 			data: scoreArrayInt,
-			color: '#{{ team.homeColour }}'
+			color: seriesColour
 		}]
 	});
 }
@@ -56,10 +68,12 @@ window.onload = function() {
 {{ team.longName }}
 <img src="{% static team.imagePath %}" alt="" width="50" height="50">
 </h1>
+{% if team.nextGame %}
 <h3>
 Next game: {{ team.nextGame.longName }}
-<img src="{% static team.nextGame.imagePath %}" alt="" width="20" height="20">
+<img src="{% static team.nextGame.imagePath %}" alt="" width="20" height="20" href={% url 'game' team.name team.nextGame.name %}>
 </h3>
+{% endif %}
 <h2>
 Tweet Sentiment
 </h2>
@@ -102,9 +116,9 @@ Tweet Locations
 Player Scores
 </h2>
 {% for player in players %}
-	{% if player.score > 70 %}
+	{% if player.score > 10 %}
 		<div class="highscore player">
-	{% elif player.score > 30 %}
+	{% elif player.score > 0 %}
 		<div class="midscore player">
 	{% else %}
 		<div class="lowscore player">

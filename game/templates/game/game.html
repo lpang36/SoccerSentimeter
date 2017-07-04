@@ -24,6 +24,28 @@ window.onload = function() {
 	if (colour1==colour2) {
 		colour2 = '#{{ team2.awayColour }}';
 	}
+	var colourTag1 = colour1 === '#ffffff';
+	var seriesColour1 = colour1;
+	var markerOptions1 = {};
+	if (colourTag1) {
+		seriesColour1 = '#000000';
+		markerOptions1 = {
+			lineWidth: 1,
+			lineColor: '#000000',
+			fillColor: '#ffffff'
+		}
+	}
+	var colourTag2 = colour2 === '#ffffff';
+	var seriesColour2 = colour2;
+	var markerOptions2 = {};
+	if (colourTag2) {
+		seriesColour2 = '#000000';
+		markerOptions2 = {
+			lineWidth: 1,
+			lineColor: '#000000',
+			fillColor: '#ffffff'
+		}
+	}
 	var chart = new Highcharts.Chart('container', {
 		chart: {
 			className: 'largediv'
@@ -59,12 +81,14 @@ window.onload = function() {
 		{
 			name: '{{ team1.longName }}',
 			data: scoreArrayInt1,
-			color: colour1
+			color: seriesColour1,
+			marker: markerOptions1
 		}, 
 		{
 			name: '{{ team2.longName }}',
 			data: scoreArrayInt2,
-			color: colour2
+			color: seriesColour2,
+			marker: markerOptions2
 		}
 		]
 	});
@@ -131,9 +155,9 @@ Tweet Locations
 {{ team1.longName }} Player Scores
 </h2>
 {% for player in players1 %}
-	{% if player.score > 70 %}
+	{% if player.score > 10 %}
 		<div class="highscore player team1">
-	{% elif player.score > 30 %}
+	{% elif player.score > 0 %}
 		<div class="midscore player team1">
 	{% else %}
 		<div class="lowscore player team1">
@@ -157,9 +181,9 @@ Tweet Locations
 {{ team2.longName }} Player Scores
 </h2>
 {% for player in players2 %}
-	{% if player.score > 70 %}
+	{% if player.score > 10 %}
 		<div class="highscore player team2">
-	{% elif player.score > 30 %}
+	{% elif player.score > 0 %}
 		<div class="midscore player team2">
 	{% else %}
 		<div class="lowscore player team2">

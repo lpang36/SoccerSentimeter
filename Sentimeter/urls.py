@@ -18,6 +18,7 @@ from django.contrib import admin
 from team.views import team
 from game.views import game
 from base.views import home
+from base.views import compare
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -25,4 +26,5 @@ urlpatterns = [
     url(r'^game/([A-Z]+)_([A-Z]+)/', game, name='game'),
 	url(r'^about/', include('base.urls'), name='about'),
 	url(r'^$', home, name='home'),
+	url(r'^$', compare, name='compare'),
 ]
