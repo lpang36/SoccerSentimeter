@@ -26,5 +26,5 @@ urlpatterns = [
     url(r'^game/([A-Z]+)_([A-Z]+)/', game, name='game'),
 	url(r'^about/', include('base.urls'), name='about'),
 	url(r'^$', home, name='home'),
-	url(r'^$', compare, name='compare'),
+	url(r'^compare/', compare, name='compare'),
 ]
