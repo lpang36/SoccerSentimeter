@@ -29,7 +29,7 @@ def analyzeTweetSentiment ( tweet ):
 	blob = TextBlob(tweet['text'])
 	return blob.sentiment.polarity*100
 
-def createTweet ( tweet, obj ):
+def createTweet ( tweet, obj, flag ):
 	newTweet = Tweet.objects.create(link=tweet['id_str'],team=obj) #parse this date properly with datetime
 	datestr1 = tweet['created_at'].split(" ")
 	datestr2 = datestr1[3].split(":")
@@ -56,7 +56,7 @@ def createTweet ( tweet, obj ):
 		newTweet.latitude = tweet['coordinates']['coordinates'][0]
 		newTweet.longitude = tweet['coordinates']['coordinates'][1]
 		loctag = True
-	if loctag or random.random()>0.1:
+	if loctag or (flag and random.random()>0.1):
 		newTweet.save()
 	else:
 		newTweet.delete()
@@ -103,7 +103,7 @@ def update ( flag ):
 		data = getTweets(thisTeam.longName, thisTeam, client, client2, numTweets)
 		teamlist = []
 		for tweet in data['statuses']:
-			teamlist.append(createTweet(tweet, thisTeam))
+			teamlist.append(createTweet(tweet, thisTeam, True))
 		if len(teamlist)==0:
 			thisTeam.score = 0
 		else:
@@ -117,7 +117,7 @@ def update ( flag ):
 				playerlist = []
 				data = getTweets(thisPlayer.firstName+" "+thisPlayer.lastName, thisPlayer, client, client2, 100)
 				for tweet in data['statuses']:
-					playerlist.append(createTweet(tweet, thisTeam))
+					playerlist.append(createTweet(tweet, thisTeam, False))
 				if len(playerlist)==0:
 					thisPlayer.score = thisPlayer.lastScore
 				else:
