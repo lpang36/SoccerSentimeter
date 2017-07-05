@@ -72,16 +72,19 @@ def update ( flag ):
 		file2 = open("lastplayer.txt","w")
 	
 	random.seed()
+	
+	keyfile = open("keys.txt","r")
+	lines = [line.rstrip('\n') for line in keyfile]
 
-	CONSUMER_KEY = "gqsJ6CliVLM46nOFsAn71EFjT"
-	CONSUMER_SECRET = "EmwVMq4ef73YSx3aP357j36EgtwH5MwnKh2FAV53bGFCAA0r7j"
-	ACCESS_KEY = "3329651637-fd7leHwH9jHc5XOzmaDQFz27i0WqMpAtkxWNlva"
-	ACCESS_SECRET = "3MIv0kokV8xfRjRpGzXpERdF4kIfLs57Jo12xUvY0KLy3"
+	CONSUMER_KEY = lines[0]
+	CONSUMER_SECRET = lines[1]
+	ACCESS_KEY = lines[2]
+	ACCESS_SECRET = lines[3]
 
-	CONSUMER_KEY2 = "NgaOJeiipvnuyJ0WDV0IobZl3"
-	CONSUMER_SECRET2 = "U7vd2EzJKT8aEhITwUQrWclZwKFTvQHkAIQRQwqokiJ99L9umb"
-	ACCESS_KEY2 = "879392004760883200-Qceh7HtHO4rHs8mpEFcQ18HsIXuMrOW"
-	ACCESS_SECRET2 = "1B589fz5x7XpxkqbBIxgrAKi7PUX2TB9TnNFWAjUwNRbA"
+	CONSUMER_KEY2 = lines[4]
+	CONSUMER_SECRET2 = lines[5]
+	ACCESS_KEY2 = lines[6]
+	ACCESS_SECRET2 = lines[7]
 
 	consumer = oauth.Consumer(key=CONSUMER_KEY, secret=CONSUMER_SECRET)
 	access_token = oauth.Token(key=ACCESS_KEY, secret=ACCESS_SECRET)
@@ -132,15 +135,14 @@ def update ( flag ):
 	if flag:
 		file2.write(str(datetime.datetime.today()))
 			
-def manageUpdate ():
-	file = open("lastteam.txt","r")
-	file2 = open("lastplayer.txt","r")
-	teamtime = datetime.datetime.strptime(file.read(),'%Y-%m-%d %H:%M:%S.%f')
-	playertime = datetime.datetime.strptime(file2.read(),'%Y-%m-%d %H:%M:%S.%f')
-	thistime = datetime.datetime.today()
-	t1 = thistime-teamtime
-	t2 = thistime-playertime
-	if t2>datetime.timedelta(0,0,3,23,30):
-		update(True)
-	elif t1>datetime.timedelta(0,0,0,23,30):
-		update(False)
+file = open("lastteam.txt","r")
+file2 = open("lastplayer.txt","r")
+teamtime = datetime.datetime.strptime(file.read(),'%Y-%m-%d %H:%M:%S.%f')
+playertime = datetime.datetime.strptime(file2.read(),'%Y-%m-%d %H:%M:%S.%f')
+thistime = datetime.datetime.today()
+t1 = thistime-teamtime
+t2 = thistime-playertime
+if t2>datetime.timedelta(0,0,3,11,30):
+	update(True)
+elif t1>datetime.timedelta(0,0,0,11,30):
+	update(False)
