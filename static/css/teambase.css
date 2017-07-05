@@ -2,29 +2,25 @@ ul {
 	padding: 0;
 }
 
-div {
-	position: relative;
-	overflow: hidden;
-}
-
-.num {
-	width: 280px;
-	text-align: right;
-	float:right;
-	padding: 2px 2px 2px 2px;
-}
-
-.name {
-	width: 300px;
-	text-align: left;
-	float:left;
-	padding: 2px 2px 2px 2px;
-}
-
 .largediv {
 	width: 600px; 
 	height: 400px; 
 	margin: auto;
+}
+
+.highscore {
+	background-color: rgba(124,252,0,0.5);
+	border-color: rgb(124,252,0);
+}
+
+.midscore {
+	background-color: rgba(211,211,211,0.5);
+	border-color: rgb(211,211,211);
+}
+
+.lowscore {
+	background-color: rgba(255,99,71,0.5);
+	border-color: rgb(255,99,71);
 }
 
 h2 {

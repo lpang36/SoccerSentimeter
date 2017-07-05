@@ -1,5 +1,10 @@
-body,html{
-    height: 100%;
+html{
+	min-height: 100%;
+	position: relative;
+  }
+  
+  body {
+	  height: 100%;
   }
 
   nav.sidebar, .main{
@@ -7,6 +12,7 @@ body,html{
       -moz-transition: margin 200ms ease-out;
       -o-transition: margin 200ms ease-out;
       transition: margin 200ms ease-out;
+	  position: absolute;
   }
 
   .main{

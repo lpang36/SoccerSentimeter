@@ -1,22 +1,21 @@
-.highscore {
-	background-color: rgba(124,252,0,0.5);
-	border-color: rgb(124,252,0);
-}
-
-.midscore {
-	background-color: rgba(211,211,211,0.5);
-	border-color: rgb(211,211,211);
-}
-
-.lowscore {
-	background-color: rgba(255,99,71,0.5);
-	border-color: rgb(255,99,71);
-}
-
 .player {
 	width: 600px;
 	height: 25px;
 	margin: auto;
 	border-style: solid;
 	border-radius: 5px;
+}
+
+.num {
+	width: 50%;
+	text-align: right;
+	float:right;
+	padding: 2px 2px 2px 2px;
+}
+
+.name {
+	width: 50%;
+	text-align: left;
+	float:left;
+	padding: 2px 2px 2px 2px;
 }

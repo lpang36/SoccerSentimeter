@@ -1,0 +1,21 @@
+.player {
+	width: 600px;
+	height: 25px;
+	margin: auto;
+	border-style: solid;
+	border-radius: 5px;
+}
+
+.num {
+	width: 50%;
+	text-align: right;
+	float:right;
+	padding: 2px 2px 2px 2px;
+}
+
+.name {
+	width: 50%;
+	text-align: left;
+	float:left;
+	padding: 2px 2px 2px 2px;
+}
