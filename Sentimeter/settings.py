@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'qs7&@4!g+(v63hwidn)ve*31#g++*7-s_iat*qtlt47+!)crby'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1'] #change this after deployment
+ALLOWED_HOSTS = ['soccersentimeter.pythonanywhere.com'] #change this after deployment
 
 
 # Application definition
@@ -58,7 +58,7 @@ ROOT_URLCONF = 'Sentimeter.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['base\\templates\\','game\\templates\\','team\\templates\\'],
+        'DIRS': ['Sentimeter/base/templates','Sentimeter/team/templates','Sentimeter/game/templates'],
         'APP_DIRS': False,
         'OPTIONS': {
             'context_processors': [
@@ -122,4 +122,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = '/home/soccersentimeter/Sentimeter/static'

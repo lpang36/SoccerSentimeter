@@ -1,16 +1,20 @@
+#!/usr/bin/python2.7
+
 #from urllib2 import Request, urlopen, URLError
 import oauth2 as oauth
 import json
-import urllib.parse
+import urllib
 import datetime
 from textblob import TextBlob
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Sentimeter.settings")
 import django
 django.setup()
-from team.models import *
-from tweet.models import *
+from team.models import Team
+from team.models import Player
+from tweet.models import Tweet
 import random
+import warnings
 
 def getTweets ( str, obj, client, client2, num ):
 	urldict = {
@@ -18,7 +22,7 @@ def getTweets ( str, obj, client, client2, num ):
 		'since': obj.date.isoformat(),
 		'count': num,
 	}
-	url = "https://api.twitter.com/1.1/search/tweets.json?"+urllib.parse.urlencode(urldict) #find a way to limit search results
+	url = "https://api.twitter.com/1.1/search/tweets.json?"+urllib.urlencode(urldict) #find a way to limit search results
 	if random.random()>0.5:
 		response, data = client.request(url)
 	else:
@@ -61,19 +65,19 @@ def createTweet ( tweet, obj, flag ):
 	else:
 		newTweet.delete()
 	return output
-	
+
 def getAggregateScore ( scorelist ):
 	return round(sum(scorelist)/len(scorelist))
-	
+
 def update ( flag ):
-	file = open("lastteam.txt","w")
+	file = open("/home/soccersentimeter/Sentimeter/lastteam.txt","w")
 	file2 = None
 	if flag:
-		file2 = open("lastplayer.txt","w")
-	
+		file2 = open("/home/soccersentimeter/Sentimeter/lastplayer.txt","w")
+
 	random.seed()
-	
-	keyfile = open("keys.txt","r")
+
+	keyfile = open("/home/soccersentimeter/other/keys.txt","r")
 	lines = [line.rstrip('\n') for line in keyfile]
 
 	CONSUMER_KEY = lines[0]
@@ -86,6 +90,8 @@ def update ( flag ):
 	ACCESS_KEY2 = lines[6]
 	ACCESS_SECRET2 = lines[7]
 
+	keyfile.close()
+
 	consumer = oauth.Consumer(key=CONSUMER_KEY, secret=CONSUMER_SECRET)
 	access_token = oauth.Token(key=ACCESS_KEY, secret=ACCESS_SECRET)
 	client = oauth.Client(consumer, access_token)
@@ -95,14 +101,14 @@ def update ( flag ):
 	client2 = oauth.Client(consumer2, access_token2)
 
 	teams = Team.objects.all()[0:20] #change this to 0
-	
+
 	for thisTeam in teams:
 		if thisTeam.name is None or thisTeam.longName is None:
 			thisTeam.delete()
 			continue
 		numTweets = 100
 		if not flag:
-			numTweets = 1000
+			numTweets = 500
 		data = getTweets(thisTeam.longName, thisTeam, client, client2, numTweets)
 		teamlist = []
 		for tweet in data['statuses']:
@@ -113,8 +119,8 @@ def update ( flag ):
 			thisTeam.score = getAggregateScore(teamlist)
 		thisTeam.scoreList = thisTeam.scoreList+str(thisTeam.score)+',' #add volume at some point
 		thisTeam.date = datetime.date.today()
-		thisTeam.save() 
-		if flag: 
+		thisTeam.save()
+		if flag:
 			players = Player.objects.filter(team=thisTeam)
 			for thisPlayer in players:
 				playerlist = []
@@ -130,15 +136,20 @@ def update ( flag ):
 				thisPlayer.date = datetime.date.today()
 				thisPlayer.save()
 			print(thisTeam.longName)
-	
+
 	file.write(str(datetime.datetime.today()))
+	file.close()
 	if flag:
 		file2.write(str(datetime.datetime.today()))
-			
-file = open("lastteam.txt","r")
-file2 = open("lastplayer.txt","r")
+		file2.close()
+
+warnings.filterwarnings("ignore")
+file = open("/home/soccersentimeter/Sentimeter/lastteam.txt","r")
+file2 = open("/home/soccersentimeter/Sentimeter/lastplayer.txt","r")
 teamtime = datetime.datetime.strptime(file.read(),'%Y-%m-%d %H:%M:%S.%f')
 playertime = datetime.datetime.strptime(file2.read(),'%Y-%m-%d %H:%M:%S.%f')
+file.close()
+file2.close()
 thistime = datetime.datetime.today()
 t1 = thistime-teamtime
 t2 = thistime-playertime
