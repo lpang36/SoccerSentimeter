@@ -54,11 +54,11 @@ window.onload = function() {
 		title: {
 			text:null
 		},
-		
+
 		xAxis: {
 			type: 'datetime'
 		},
-		
+
 		yAxis: {
 			title: {
 				text: 'Average Sentiment Score'
@@ -83,7 +83,7 @@ window.onload = function() {
 			data: scoreArrayInt1,
 			color: seriesColour1,
 			marker: markerOptions1
-		}, 
+		},
 		{
 			name: '{{ team2.longName }}',
 			data: scoreArrayInt2,
@@ -95,9 +95,9 @@ window.onload = function() {
 }
 </script>
 <h1 id="header">
-<img src="{% static team1.imagePath %}" alt="" width="50" height="50">
+<img src="{% static team1.imagePath %}" alt="" width="auto" height="50">
 {{ team1.longName }} vs {{ team2.longName }}
-<img src="{% static team2.imagePath %}" alt="" width="50" height="50">
+<img src="{% static team2.imagePath %}" alt="" width="auto" height="50">
 </h1>
 <h2>
 Tweet Sentiment
@@ -156,11 +156,11 @@ Tweet Locations
 	</h2>
 	{% for player in players1 %}
 		{% if player.score > 10 %}
-			<div class="highscore player team1">
+			<div class="highscore player team1" onmouseenter='showWiki(this,"{{ player }}")' onmouseleave='hideWiki(this)'>
 		{% elif player.score > 0 %}
-			<div class="midscore player team1">
+			<div class="midscore player team1" onmouseenter='showWiki(this,"{{ player }}")' onmouseleave='hideWiki(this)'>
 		{% else %}
-			<div class="lowscore player team1">
+			<div class="lowscore player team1" onmouseenter='showWiki(this,"{{ player }}")' onmouseleave='hideWiki(this)'>
 		{% endif %}
 			<div class="name">
 				{{ player }}
@@ -182,11 +182,11 @@ Tweet Locations
 	</h2>
 	{% for player in players2 %}
 		{% if player.score > 10 %}
-			<div class="highscore player team2">
+			<div class="highscore player team2" onmouseenter='showWiki(this,"{{ player }}")' onmouseleave='hideWiki(this)'>
 		{% elif player.score > 0 %}
-			<div class="midscore player team2">
+			<div class="midscore player team2" onmouseenter='showWiki(this,"{{ player }}")' onmouseleave='hideWiki(this)'>
 		{% else %}
-			<div class="lowscore player team2">
+			<div class="lowscore player team2" onmouseenter='showWiki(this,"{{ player }}")' onmouseleave='hideWiki(this)'>
 		{% endif %}
 			<div class="name">
 				{{ player }}
