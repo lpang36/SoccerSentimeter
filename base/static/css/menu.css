@@ -2,7 +2,7 @@ html{
 	min-height: 100%;
 	position: relative;
   }
-  
+
   body {
 	  height: 100%;
   }
@@ -23,7 +23,7 @@ html{
 
     .main{
       position: absolute;
-      width: calc(100% - 40px); 
+      width: calc(100% - 40px);
       margin-left: 40px;
       float: right;
     }
@@ -41,7 +41,7 @@ html{
       width: 100%;
       margin-left: 0px;
     }
-    
+
     nav.sidebar a{
       padding-right: 13px;
     }
@@ -92,6 +92,27 @@ html{
     .forAnimate{
       opacity: 0;
     }
+  }
+
+  @media (min-width: 1200px) {
+
+    main{
+      width: calc(100% - 200px);
+      margin-left: 200px;
+    }
+
+    nav.sidebar{
+      margin-left: 0px;
+      float: left;
+    }
+
+    nav.sidebar .forAnimate{
+      opacity: 1;
+    }
+  }
+
+  main {
+    margin-bottom: 40px;
   }
 
   nav.sidebar .navbar-nav .open .dropdown-menu>li>a:hover, nav.sidebar .navbar-nav .open .dropdown-menu>li>a:focus {

@@ -1,7 +1,9 @@
 function adjustOnEnter() {
-	$("main").css("margin-left","200px");
+	if ($(window).width()<1200)
+	    $("main").css("margin-left","200px");
 }
 
 function adjustOnExit() {
-	$("main").css("margin-left","0px");
+    if ($(window).width()<1200)
+	    $("main").css("margin-left","0px");
 }

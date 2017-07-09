@@ -4,5 +4,11 @@ h2 {
 }
 
 main {
-	padding-left: 60px;
+   padding-left: 60px;
+}
+
+@media (min-width: 1200px) {
+    main {
+    	padding-left: 40px;
+    }
 }
