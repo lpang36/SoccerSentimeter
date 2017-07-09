@@ -27,6 +27,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['soccersentimeter.pythonanywhere.com'] #change this after deployment
 
+SECURE_SSL_REDIRECT = True
 
 # Application definition
 

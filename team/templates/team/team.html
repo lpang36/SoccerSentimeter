@@ -32,11 +32,11 @@ window.onload = function() {
 			//text: '{{ team.longName }} Tweet Sentiment'
 			text:null
 		},
-		
+
 		xAxis: {
 			type: 'datetime'
 		},
-		
+
 		yAxis: {
 			title: {
 				text: 'Average Sentiment Score'
@@ -55,7 +55,7 @@ window.onload = function() {
 			    marker: markerOptions
 			}
 		},
-		
+
 		series: [{
 			name: '{{ team.longName }}',
 			data: scoreArrayInt,
@@ -117,11 +117,11 @@ Player Scores
 </h2>
 {% for player in players %}
 	{% if player.score > 10 %}
-		<div class="highscore player">
+		<div class="highscore player" onmouseenter='showWiki(this,"{{ player }}")' onmouseleave='hideWiki(this)'>
 	{% elif player.score > 0 %}
-		<div class="midscore player">
+		<div class="midscore player" onmouseenter='showWiki(this,"{{ player }}")' onmouseleave='hideWiki(this)'>
 	{% else %}
-		<div class="lowscore player">
+		<div class="lowscore player" onmouseenter='showWiki(this,"{{ player }}")' onmouseleave='hideWiki(this)'>
 	{% endif %}
 		<div class="name">
 			{{ player }}

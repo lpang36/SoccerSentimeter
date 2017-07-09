@@ -25,6 +25,24 @@ ul {
 	border-color: rgb(255,99,71);
 }
 
+.highscore:hover {
+    border-color: rgb(94,222,0);
+}
+
+.midscore:hover {
+    border-color: rgb(181,181,181);
+}
+
+.lowscore:hover {
+    border-color: rgb(225,69,41);
+}
+
+.wiki {
+    width = 100%;
+    max-height = 100px;
+    background-color = white;
+}
+
 h2 {
 	color: #333333;
 	font-size: 18px;

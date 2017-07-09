@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 <html lang = "en">
-   
+
    <head>
       <!-- Bootstrap -->
 	  <title> Premier League Sentimeter </title>
@@ -15,6 +15,7 @@
 	  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 		<script src="{% static 'js/menu.js' %}"></script>
+		<script src="{% static 'js/wiki.js' %}"></script>
    </head>
    <body>
 	<nav class="navbar navbar-default sidebar" role="navigation" onmouseover='adjustOnEnter()' onmouseout='adjustOnExit()'>
@@ -25,7 +26,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-      </button>      
+      </button>
     </div>
     <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
       <ul class="nav navbar-nav">
@@ -54,9 +55,9 @@
 			<li><a href={% url 'team' 'WBA' %}>West Bromwich Albion</a></li>
 			<li><a href={% url 'team' 'WHU' %}>West Ham</a></li>
           </ul>
-        </li>    
-		<li ><a href={% url 'compare' %}>Compare Teams<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-stats"></span></a></li> 		
-        <li ><a href={% url 'about' %}>About<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>        
+        </li>
+		<li ><a href={% url 'compare' %}>Compare Teams<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-stats"></span></a></li>
+        <li ><a href={% url 'about' %}>About<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>
       </ul>
     </div>
   </div>

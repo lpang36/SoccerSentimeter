@@ -48,7 +48,7 @@ class Team(models.Model):
 	)
     def __str__(self):
         return self.longName
-    
+
 class Player(models.Model):
     date = models.DateField(
         default=timezone.now)
@@ -69,4 +69,7 @@ class Player(models.Model):
 		null=True,
     )
     def __str__(self):
-        return self.lastName
+        if self.firstName is not None:
+            return self.firstName+' '+self.lastName
+        else:
+            return self.lastName
