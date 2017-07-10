@@ -3,43 +3,81 @@
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/basictext.css' %}">
+<script src="{% static 'js/button.js' %}"></script>
 <div class = "content">
 <h1>
 Premier League Sentimeter
 </h1>
-<h2>
-About
-</h2>
-<p>
-This site uses twitter data to gauge the overall sentiment about a soccer team and its players. 
-</p>
-<h2>
-Team Score
-</h2>
-<p>
-For each team, its overall sentiment score for the past month is displayed in a line graph. This score is determined by averaging the sentiment score of a sample of tweets over a given time period.
-</p>
-<h2>
-Tweet Locations
-</h2>
-<p>
-Locations of tweets about a particular team are displayed via twitter geolocation data. Note that this data only exists for a small fraction of tweets. 
-</p>
-<h2>
-Player Scores
-</h2>
-<p>
-Player scores are determined the same way as those of teams. 
-<img src="{% static "images/up.png" %}" alt="" width="10" height="10"> 
-means a positive change, 
-<img src="{% static "images/down.png" %}" alt="" width="10" height="10">
-means a negative change, and 
-<img src="{% static "images/neutral.png" %}" alt="" width="10" height="10">
-means the score was unchanged or no tweets were found. Note that small sample size may skew some player scores.
-</p>
-<h2>
-Navigation
-</h2>
-The sidebar menu links to each team. The <a href="{% url 'compare' %}">compare tool</a> allows for the data of two teams to be displayed simultaneously and compared.
+<div class="header">
+    <h2>
+        <span class="toggle glyphicon glyphicon-align-justify" onclick="toggle('sent')" style="padding-right:20px;"></span>
+    Sentiment Analysis
+    </h2>
+    <div class = "show" id="sent">
+        <p>
+        This site uses twitter data to gauge the overall sentiment about a soccer team and its players. Using natural language processing, a sample of tweets about a particular subject are analyzed. For example,
+        the following tweet is classified as having a positive sentiment <span style="color:green">(+0.70)</span>:
+        </p>
+        <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Wayne Rooney: a great player who gave everything for the England and the Man United shirt</p>&mdash; isaac (@_isaacmx) <a href="https://twitter.com/_isaacmx/status/884072913351180288">July 9, 2017</a></blockquote> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <p>
+        While this tweet is classified as having a negative sentiment <span style="color:red">(-0.60)</span>:
+        </p>
+        <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Surprised to see such positivity around Rooney&#39;s Everton move in my TL. Want him to do well but it&#39;s obviously a bad signing for Everton.</p>&mdash; Tiago Estêvão (@TiagoEstv) <a href="https://twitter.com/TiagoEstv/status/884043504820912129">July 9, 2017</a></blockquote> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+</div>
+<div class="header">
+    <h2>
+        <span class="toggle glyphicon glyphicon-align-justify" onclick="toggle('team')" style="padding-right:20px;"></span>
+    Team Sentiment
+    </h2>
+    <div class = "show" id="team">
+        <p>
+        For each team, its sentiment score history is displayed in a line graph. These scores are determined by averaging the sentiment score of a sample of up to 1000 tweets containing the team's name over the past day.
+        Currently, the database contains only data for Premier League teams.
+        </p>
+        <img src="{% static "images/teamscore.PNG" %}" alt="" style="margin: auto; display: block;">
+    </div>
+</div>
+<div class="header">
+    <h2>
+        <span class="toggle glyphicon glyphicon-align-justify" onclick="toggle('loc')" style="padding-right:20px;"></span>
+    Tweet Location
+    </h2>
+    <div class = "show" id="loc">
+        <p>
+        Locations of tweets about a particular team are displayed via twitter geolocation data. Note that this data only exists for a small fraction of tweets.
+        </p>
+        <img src="{% static "images/tweetlocs.PNG" %}" alt="" style="margin: auto; display: block;">
+    </div>
+</div>
+<div class="header">
+    <h2>
+        <span class="toggle glyphicon glyphicon-align-justify" onclick="toggle('player')" style="padding-right:20px;"></span>
+        Player Sentiment
+    </h2>
+    <div class = "show" id="player">
+        <p>
+        Player scores are determined the same way as those of teams.
+        <img src="{% static "images/up.png" %}" alt="" width="10" height="10">
+        means a positive change from the previous day,
+        <img src="{% static "images/down.png" %}" alt="" width="10" height="10">
+        means a negative change, and
+        <img src="{% static "images/neutral.png" %}" alt="" width="10" height="10">
+        means the score was unchanged or no tweets were found. Note that small sample size may skew some player scores. Hovering over each player gives a small sample of text from Wikipedia describing the player.
+        Note that recently transferred players may not appear in the database.
+        </p>
+        <img src="{% static "images/players.PNG" %}" alt="" style="margin: auto; display: block;">
+    </div>
+</div>
+<div class="header">
+    <h2>
+        <span class="toggle glyphicon glyphicon-align-justify" onclick="toggle('teamnav')" style="padding-right:20px;"></span>
+        Navigation
+    </h2>
+    <div class = "show" id="teamnav">
+        <p>
+        Links to each team's page can be found in the sidebar menu. The <a href="{% url 'compare' %}">compare tool</a> allows for the data of two teams to be displayed simultaneously and compared.
+        </p>
+    </div>
 </div>
 {% endblock %}

@@ -8,7 +8,7 @@ function showWiki (elem, str) {
     $(elem).find(".wiki").css("background-color","white");
     $(elem).find(".wiki").css("clear","both");
     $(elem).find(".wiki").css("padding","5px");
-    $(elem).find(".wiki").css("overflow","hidden");
+    $(elem).find(".wiki").css("overflow","scroll");
     var title = "";
     var search = str.replace(" ","_");
     //console.log(search);
@@ -67,7 +67,7 @@ function showWiki (elem, str) {
                     for (var key in obj) {
                         var blurb = String(data.query.results.json.query.pages[key].extract);
                         $(elem).find(".wiki").append("<p></p>");
-                        $(elem).find(".wiki").find("p").css("overflow","hidden");
+                        //$(elem).find(".wiki").find("p").css("overflow","scroll");
                         //$(elem).find(".wiki").find("p").css("white-space","nowrap");
                         //$(elem).find(".wiki").find("p").css("text-overflow","ellipsis");
                         //$(elem).find(".wiki").find("p").css("max-width","800px");
