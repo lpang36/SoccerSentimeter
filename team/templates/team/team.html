@@ -12,6 +12,8 @@ window.onload = function() {
 		var x = parseInt(i);
 		scoreArrayInt[scoreArrayInt.length] = x;
 	}
+	scoreArrayInt1 = scoreArrayInt.slice(-6,-1);
+	//console.log(scoreArrayInt1);
 	var colourTag = '{{ team.homeColour }}' === 'ffffff';
 	var seriesColour = '#{{ team.homeColour }}';
 	var markerOptions = {};
@@ -23,10 +25,7 @@ window.onload = function() {
 			fillColor: '#ffffff'
 		}
 	}
-	var chart = new Highcharts.Chart('container', {
-		chart: {
-			className: 'largediv'
-		},
+	var chart1 = new Highcharts.Chart('tab1', {
 
 		title: {
 			//text: '{{ team.longName }} Tweet Sentiment'
@@ -50,7 +49,117 @@ window.onload = function() {
 
 		plotOptions: {
 			series: {
-				pointStart: Date.UTC(2017,6,1),
+				pointStart: Date.now()-24*3600*1000*scoreArrayInt1.length,
+				pointInterval: 24*3600*1000,
+			    marker: markerOptions
+			}
+		},
+
+		series: [{
+			name: '{{ team.longName }}',
+			data: scoreArrayInt1,
+			color: seriesColour
+		}]
+	});
+	scoreArrayInt2 = scoreArrayInt.slice(-11,-1);
+	var chart2 = new Highcharts.Chart('tab2', {
+
+		title: {
+			//text: '{{ team.longName }} Tweet Sentiment'
+			text:null
+		},
+
+		xAxis: {
+			type: 'datetime'
+		},
+
+		yAxis: {
+			title: {
+				text: 'Average Sentiment Score'
+			}
+		},
+		legend: {
+			layout: 'vertical',
+			align: 'right',
+			verticalAlign: 'middle'
+		},
+
+		plotOptions: {
+			series: {
+				pointStart: Date.now()-24*3600*1000*scoreArrayInt2.length,
+				pointInterval: 24*3600*1000,
+			    marker: markerOptions
+			}
+		},
+
+		series: [{
+			name: '{{ team.longName }}',
+			data: scoreArrayInt2,
+			color: seriesColour
+		}]
+	});
+	scoreArrayInt3 = scoreArrayInt.slice(-31,-1);
+	var chart3 = new Highcharts.Chart('tab3', {
+
+		title: {
+			//text: '{{ team.longName }} Tweet Sentiment'
+			text:null
+		},
+
+		xAxis: {
+			type: 'datetime'
+		},
+
+		yAxis: {
+			title: {
+				text: 'Average Sentiment Score'
+			}
+		},
+		legend: {
+			layout: 'vertical',
+			align: 'right',
+			verticalAlign: 'middle'
+		},
+
+		plotOptions: {
+			series: {
+				pointStart: Date.now()-24*3600*1000*scoreArrayInt3.length,
+				pointInterval: 24*3600*1000,
+			    marker: markerOptions
+			}
+		},
+
+		series: [{
+			name: '{{ team.longName }}',
+			data: scoreArrayInt3,
+			color: seriesColour
+		}]
+	});
+	var chart4 = new Highcharts.Chart('tab4', {
+
+		title: {
+			//text: '{{ team.longName }} Tweet Sentiment'
+			text:null
+		},
+
+		xAxis: {
+			type: 'datetime'
+		},
+
+		yAxis: {
+			title: {
+				text: 'Average Sentiment Score'
+			}
+		},
+		legend: {
+			layout: 'vertical',
+			align: 'right',
+			verticalAlign: 'middle'
+		},
+
+		plotOptions: {
+			series: {
+				pointStart: Date.now()-24*3600*1000*scoreArrayInt.length,
 				pointInterval: 24*3600*1000,
 			    marker: markerOptions
 			}
@@ -77,7 +186,28 @@ Next game: {{ team.nextGame.longName }}
 <h2>
 Tweet Sentiment
 </h2>
-<div id="container" class="largediv"></div>
+<div id="container" class="tabs largediv">
+    <ul class="tab-links">
+        <li class="tab1"><a href="#tab1">5d</a></li>
+        <li class="tab2"><a href="#tab2">10d</a></li>
+        <li class="tab3"><a href="#tab3">30d</a></li>
+        <li class="tab4"><a href="#tab4">All</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="tab1" class="tab active">
+        </div>
+
+        <div id="tab2" class="tab">
+        </div>
+
+        <div id="tab3" class="tab">
+        </div>
+
+        <div id="tab4" class="tab">
+        </div>
+    </div>
+</div>
 <h2>
 Tweet Locations
 </h2>
