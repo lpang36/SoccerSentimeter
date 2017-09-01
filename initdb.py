@@ -61,10 +61,10 @@ for line in file:
 			if words[1]=="lastName":
 				if Player.objects.filter(lastName=words[2],team=currentTeam).exists():
 					currentPlayer = Player.objects.get(lastName=words[2],team=currentTeam)
-				else: 
+				else:
 					currentPlayer = Player.objects.create(lastName = words[2],team = currentTeam)
 			elif words[1]=="firstName":
 				currentPlayer.firstName = words[2]
 		currentTeam.save()
 		currentPlayer.save()
-	
+
